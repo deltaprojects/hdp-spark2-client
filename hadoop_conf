@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+AMBARI_HOST="http://ambari.service.delta.prod:8080"
+
+curl -o yarn.tar -u reader:reader ${AMBARI_HOST}/api/v1/clusters/hdp/services/YARN/components/YARN_CLIENT?format=client_config_tar
+tar xf yarn.tar ./core-site.xml ./yarn-site.xml
+rm yarn.tar
+
+curl -o hdfs.tar -u reader:reader ${AMBARI_HOST}/api/v1/clusters/hdp/services/HDFS/components/HDFS_CLIENT?format=client_config_tar
+tar xf hdfs.tar ./hdfs-site.xml
+rm hdfs.tar
+
+curl -o mr2.tar -u reader:reader ${AMBARI_HOST}/api/v1/clusters/hdp/services/MAPREDUCE2/components/MAPREDUCE2_CLIENT?format=client_config_tar
+tar xf  mr2.tar ./mapred-site.xml
+rm mr2.tar
+
