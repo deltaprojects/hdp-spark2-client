@@ -1,13 +1,15 @@
-FROM azul/zulu-openjdk:8
+FROM azul/zulu-openjdk:8u172-8.30.0.1
 
 RUN apt-get update -yqq \
     && apt-get upgrade -yqq \
     && apt-get install -yqq --no-install-recommends wget
-
+RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com B9733A7A07513CAD
 RUN wget http://public-repo-1.hortonworks.com/HDP/ubuntu16/2.x/updates/2.6.1.0/hdp.list -O /etc/apt/sources.list.d/hdp.list
-RUN apt-get update && apt-get upgrade && apt-get install -y --allow-unauthenticated spark2-2-6-1-0-129
-ENV HADOOP_PREFIX /usr/hdp/2.6.1.0-129/hadoop
+RUN apt-get update -yqq \
+    && apt-get upgrade -yqq \
+    && apt-get install -y --allow-unauthenticated spark2-2-6-1-0-129
 
+ENV HADOOP_PREFIX /usr/hdp/2.6.1.0-129/hadoop
 ENV YARN_CONF_DIR $HADOOP_PREFIX/etc/hadoop
 
 RUN \
