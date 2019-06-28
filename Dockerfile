@@ -2,7 +2,7 @@ FROM azul/zulu-openjdk:8u172-8.30.0.1
 
 RUN apt-get update -yqq \
     && apt-get upgrade -yqq \
-    && apt-get install -yqq --no-install-recommends wget
+    && apt-get install -yqq --no-install-recommends wget curl
 RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com B9733A7A07513CAD
 RUN wget http://public-repo-1.hortonworks.com/HDP/ubuntu16/2.x/updates/2.6.1.0/hdp.list -O /etc/apt/sources.list.d/hdp.list
 RUN apt-get update -yqq \
